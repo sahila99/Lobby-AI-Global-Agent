@@ -25,7 +25,6 @@ jobs:
       - name: 3. Install Libraries
         run: |
           pip install -r requirements.txt
-          playwright install chromium # Required for stealth scouting
 
       - name: 4. Run the Scout
         run: python scout.py
