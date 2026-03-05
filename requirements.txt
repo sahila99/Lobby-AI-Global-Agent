@@ -2,5 +2,6 @@ streamlit
 pandas
 python-docx
 requests
+aiohttp
 playwright
 playwright-stealth
