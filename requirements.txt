@@ -1,9 +1,4 @@
-streamlit
 pandas
-python-docx
 requests
-aiohttp
-beautifulsoup4
-lxml
-playwright
-playwright-stealth
+streamlit
+python-docx
