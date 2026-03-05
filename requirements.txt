@@ -3,5 +3,7 @@ pandas
 python-docx
 requests
 aiohttp
+beautifulsoup4
+lxml
 playwright
 playwright-stealth
