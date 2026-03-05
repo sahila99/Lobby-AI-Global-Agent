@@ -3,45 +3,29 @@ import pandas as pd
 from datetime import datetime
 
 def run_scout():
-    print("🛰️ Lobby-AI: Starting Global Executive Scout...")
-    
-    # 1. This is where your scouting logic lives. 
-    # For now, we generate a 'found' list to ensure the database sync works.
-    found_jobs = [
-        {
-            "Company": "Global Tech Corp", 
-            "Role": "IT Head", 
-            "Location": "Nigeria", 
-            "URL": "https://linkedin.com/jobs/example1"
-        },
-        {
-            "Company": "Digital UAE", 
-            "Role": "Head of Infrastructure", 
-            "Location": "UAE", 
-            "URL": "https://linkedin.com/jobs/example2"
-        }
-    ]
-    
-    # 2. Sync to the Database (CSV)
+    print("🚀 Lobby-AI: Starting Light Scout...")
     db_file = 'job_database.csv'
     
-    # Check if the file exists; if not, create it with headers
-    if os.path.exists(db_file):
-        df = pd.read_csv(db_file)
-    else:
+    # Safety Check: Create file if it's missing
+    if not os.path.exists(db_file):
         df = pd.DataFrame(columns=['Date', 'Company', 'Role', 'Location', 'URL', 'Status'])
+        df.to_csv(db_file, index=False)
+        print("📁 Created new database file.")
 
-    # 3. Process new jobs
-    new_data = pd.DataFrame(found_jobs)
-    new_data['Date'] = datetime.now().strftime("%Y-%m-%d")
-    new_data['Status'] = 'New'
+    # Add a success marker to the database
+    new_entry = {
+        'Date': datetime.now().strftime("%Y-%m-%d"),
+        'Company': 'System Check',
+        'Role': 'Cloud Agent',
+        'Location': 'GitHub Cloud',
+        'URL': 'https://github.com',
+        'Status': 'Operational ✅'
+    }
     
-    # Combine and remove duplicates based on the URL
-    updated_df = pd.concat([df, new_data]).drop_duplicates(subset=['URL'], keep='first')
-    
-    # Save back to GitHub
-    updated_df.to_csv(db_file, index=False)
-    print(f"✅ Success: {len(found_jobs)} jobs processed and synced to database.")
+    df = pd.read_csv(db_file)
+    df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
+    df.to_csv(db_file, index=False)
+    print("✅ System Check Complete: Database Updated.")
 
 if __name__ == "__main__":
     run_scout()
