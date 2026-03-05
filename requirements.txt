@@ -2,4 +2,3 @@ pandas
 requests
 streamlit
 python-docx
-aiohttp
